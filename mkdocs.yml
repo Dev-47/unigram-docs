@@ -1,0 +1,8 @@
+site_name: Unigram
+nav:
+  - Home: index.md
+  - Service Architecture: service-architecture.md
+  - Microservices:
+      - Account Service: services/account-service.md
+      - Broadcast Service: services/broadcast-service.md
+theme: readthedocs
