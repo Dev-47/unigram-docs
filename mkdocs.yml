@@ -3,6 +3,7 @@ nav:
   - Home: index.md
   - Service Architecture: service-architecture.md
   - Microservices:
+      - Index: services/README.md
       - Account Service: services/account-service.md
       - Broadcast Service: services/broadcast-service.md
 theme: readthedocs
