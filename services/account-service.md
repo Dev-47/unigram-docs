@@ -1,17 +1,24 @@
 # unigram-accounts-service
 
-This service will handle user/account based operations;
+This service will handle user / account based operations like;
 - authentications
 - profile updates
 - preferences
 - passwords / resets
 - account types
 
-This service would be required to have the following endpoints
-**NB**: Never return sensitive data to the json response. All response data must be in json format.
+# expected endpoints
 
-- login: to authenticate users with `username` and `password`, returns a `token` along with any other information (excluding `password`)
-- register: register new users with `email`, `username` and `password`, returns a `token` along with any other information (excluding `password`)
-- logout: invalidates existing `token` for a user
-- profile: with mutiple request methods, a user profile can be fetched with one method(GET), and updated with another method(PUT/PATCH), profile update should not include password updates
-- password update / reset: endpoint to reconfirm `username` and `password` and send OTP for password update
+- `/login/`
+  - using `POST` method, pass `username` and `password` to request body to authenticate users and return a `token` along with any other information 
+- `/register/`
+  - using `POST` method, pass `email`, `username` and `password` to request body and return a `token` along with any other information
+- `/logout/`
+  - using `GET` method, invalidate/destroy existing `token` for a user
+- `/profile/`
+  - using `GET` method, return the authenticated user
+  - using `PUT` / `PATCH` method, update user profile, update should not include password updates
+- `password/reset/`
+  - using `POST` method, pass `email` to request body
+    - send OTP for password update
+    - allow password to be updated if OTP is valid
