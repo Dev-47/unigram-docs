@@ -1,5 +1,3 @@
-# Unigram Microservices
-
 This contains documentations for unigram microservices.
 
 # Conventions
