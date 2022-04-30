@@ -6,4 +6,5 @@ nav:
       - Index: services/README.md
       - Account Service: services/account-service.md
       - Broadcast Service: services/broadcast-service.md
+      - Forum Service: services/forum-service.md
 theme: readthedocs
