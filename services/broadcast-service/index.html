@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Broadcast Service - Unigram</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Broadcast Service";
+        var mkdocs_page_input_path = "services/broadcast-service.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Unigram
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../service-architecture/">Service Architecture</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Microservices</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Index</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../account-service/">Account Service</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Broadcast Service</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../forum-service/">Forum Service</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Unigram</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>Microservices &raquo;</li><li>Broadcast Service</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="unigram-broadcast-service">unigram-broadcast-service</h1>
+<p>This service will be responsible for sending broadcast to a specific channel (group) and the memebers in that channel can add comments to each broadcast
+sent. Permissions are restricted to authorized users only with permission of <code>can_send_broadcast</code> from the <code>unigram-account-service</code>.
+All users must be authenticated to perform any action on this service. Broadcasts can only be edited by the <code>author</code>.</p>
+<h1 id="expected-endpoints">expected endpoints</h1>
+<ul>
+<li><code>/broadcast/</code></li>
+<li>
+<p>using the <code>GET</code> method, list all broadcast available, and also allow options to use filters</p>
+<ul>
+<li>filter options: <code>date_of_creation</code>, <code>category</code></li>
+</ul>
+</li>
+<li>
+<p>using the <code>POST</code> method, broadcasts can get created by authorized users with the permission of <code>can_create_broadcast</code></p>
+<ul>
+<li>each broadcast should belong to a university</li>
+<li>each broadcast should belong to a new / exisiting category</li>
+<li>broadcast category can be nested</li>
+</ul>
+</li>
+<li>
+<p><code>broadcast/:broadcast_id/</code></p>
+</li>
+<li>
+<p>using the <code>GET</code> method, a broadcast can be fetched using the <code>broadcast_id</code>, this should return a single broadcast object</p>
+</li>
+<li>
+<p><code>broadcast/:broadcast_id/join/</code></p>
+</li>
+<li>
+<p>using the <code>GET</code> method, an authenticated user that belongs to a university can request to join a broadcast</p>
+</li>
+<li>
+<p><code>broadcast/:broadcast_id/leave/</code></p>
+</li>
+<li>
+<p>using the <code>GET</code> method, an authenticated user that belongs to a university can leave a broadcast</p>
+</li>
+<li>
+<p><code>broadcast/:broadcast_id/send-broadcast/</code></p>
+</li>
+<li>using the <code>POST</code> method, an authenticated user with the permission of <code>can_send_broadcast</code> can send broadcast to channel</li>
+<li>pass all data to the body of the request</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../account-service/" class="btn btn-neutral float-left" title="Account Service"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../forum-service/" class="btn btn-neutral float-right" title="Forum Service">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../account-service/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../forum-service/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
